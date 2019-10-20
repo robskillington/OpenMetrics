@@ -8,6 +8,11 @@ BINARIES :=         \
 test-impl: openmetricstest
 	$(BUILD)/openmetricstest -cmd-parser-text $(cmd-parser-text)
 
+.PHONY: generate-proto
+generate-proto: setup
+	@echo Generating protobuf
+	protoc --go_out=$(BUILD) ./proto/*.proto
+
 .PHONY: setup
 setup:
 	mkdir -p $(BUILD)
@@ -25,4 +30,3 @@ $(BINARY): setup
 endef
 
 $(foreach BINARY,$(BINARIES),$(eval $(BINARY_RULES)))
-

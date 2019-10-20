@@ -5,7 +5,13 @@ jobs:
       - image: circleci/golang
     steps:
       - checkout
-      - run: "make binaries"
+      - run: "make binaries" 
+  generate-proto:
+    docker:
+      - image: grpc/go
+    steps:
+      - checkout
+      - run: "make generate-proto"
   test-success:
     docker:
       - image: circleci/golang
